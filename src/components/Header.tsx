@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import cheflogo from "../img/cheflogo.png";
 
@@ -5,7 +6,7 @@ export default function Header() {
   return (
     <div className="container bg-[#c9945b] w-full h-36 rounded-t-3xl flex justify-center items-center relative">
       <div className="text-6xl cursor-pointer pl-10 font-patrick text-[#fcf4d3]">
-        How2Cooking
+        <Link to="/">How2Cooking</Link>
       </div>
       <div>
         <img src={cheflogo} className="w-72 " />

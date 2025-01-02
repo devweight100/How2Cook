@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface CATEGORIES {
   idCategory: string;
@@ -19,6 +20,11 @@ interface CATEGORIES {
 function ShowMeal() {
   const [meal, setMeal] = useState<CATEGORIES[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
+  const handleView = (c:string) => {
+    navigate(`/categories?category=${c}`)
+  }
 
   const mealArr = [
     "Beef",
@@ -80,7 +86,11 @@ function ShowMeal() {
         </CardHeader>
 
         <CardFooter className="relative h-full">
-          <Button className="absolute bottom-0 right-0 bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2">
+       
+          <Button
+            className="absolute bottom-0 right-0 bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2"
+            onClick={() => handleView(item.strCategory)}
+          >
             VIEW MEAL
           </Button>
         </CardFooter>
@@ -88,7 +98,7 @@ function ShowMeal() {
     );
   });
   return (
-    <div className="flex flex-wrap gap-11">
+    <div className="flex flex-wrap w-full px-12 gap-10 items-center">
       {loading ? "Loading..." : mealList}
     </div>
   );
