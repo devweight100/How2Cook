@@ -13,7 +13,9 @@ export default function Header() {
       </div>
 
       <div className="text-lg pr-4 font-patrick justify-center items-center text-[#fcf4d3] flex">
-        <div className="mx-4 cursor-pointer">CATEGORIES</div>
+        <div className="mx-4 cursor-pointer">
+          <Link to="/favorite">FAVORITE</Link>
+        </div>
         <div className="mx-4 cursor-pointer">RANDOM MEAL</div>
 
         <div className="mx-4">

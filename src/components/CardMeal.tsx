@@ -8,25 +8,44 @@ import {
 import { Button } from "./ui/button";
 import { MealType } from "@/api/type/MealType";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import MealContext,{ MealContextType } from "./context/Meals";
+import { set } from "date-fns";
+import { Link } from "react-router-dom";
+
 interface CardMealProps{
-  meal: MealType
+  meal: MealType,
 }
+
 export default function CardMeal({meal}:CardMealProps) {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeId,setLikeId] = useState<string[]>([])
+  const { likeIds, setLikeIds } = useContext<MealContextType>(MealContext);
+
   const handleLike = () => {
     setIsLiked(!isLiked);
+    if (!isLiked) {
+      setLikeIds([...likeIds, meal])
+    } else {
+      setLikeIds(likeIds.filter((ele) => ele.idMeal !== meal.idMeal))
+    }
   }
   useEffect(() => {
-    if (isLiked) {
-      setLikeId([...likeId, meal.idMeal]);
-      console.log(meal.idMeal)
-    } else if (!isLiked) {
-      const updatedLike = likeId.filter((id) => id !== meal.idMeal);
-      setLikeId(updatedLike);
+    // console.log(likeIds);
+    if (likeIds.some((like) => like.idMeal === meal.idMeal)) {
+      setIsLiked(true);
     }
-    console.log(likeId);
-  },[isLiked])
+  }, [likeIds.length]);
+  // useEffect(() => {
+    
+  //   if (isLiked) {
+  //     setLikeIds([...likeIds, meal]);
+  //   } else if (!isLiked ) {
+  //     const updatedLike = likeIds.filter((ele) => ele.idMeal !== meal.idMeal);
+  //     console.log(updatedLike);
+  //     setLikeIds(updatedLike);
+  //   }
+  // }, [isLiked]);
+
   return (
     <Card
       key={meal.idMeal}
@@ -38,7 +57,7 @@ export default function CardMeal({meal}:CardMealProps) {
           src={meal.strMealThumb}
           alt={meal.strMeal}
         />
-        <CardTitle className="text-xl text-center cursor-pointer pl-4 font-patrick  text-[#735e3c]">
+        <CardTitle className="text-lg text-center cursor-pointer  font-patrick  text-[#735e3c]">
           {meal.strMeal.length > 36
             ? meal.strMeal.slice(0, 33).concat("...")
             : meal.strMeal}
@@ -48,7 +67,7 @@ export default function CardMeal({meal}:CardMealProps) {
       <CardFooter className="relative h-full">
         <div
           onClick={() => handleLike()}
-          className="hover:cursor-pointer bottom-0 left-0 absolute"
+          className="hover:cursor-pointer bottom-0 left-1 absolute"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -63,12 +82,14 @@ export default function CardMeal({meal}:CardMealProps) {
             <path d="M20.8 4.6a5.4 5.4 0 00-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 00-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 000-7.6z" />
           </svg>
         </div>
-        <Button
-          className="absolute bottom-0 right-0 bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2"
-          onClick={() => console.log(meal.idMeal)}
-        >
-          VIEW MEAL
-        </Button>
+        <Link to={`/detail/${meal.idMeal}`}>
+          <Button
+            className="absolute bottom-0 right-0 bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2"
+            
+          >
+            View Detail
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

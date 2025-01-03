@@ -1,4 +1,9 @@
+interface DetailPageProps { 
+  id: string;
+}
+
 const DetailPage = () => {
+ 
   return (
     <div>
       <h1>DetailPage</h1>
