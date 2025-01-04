@@ -2,7 +2,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import cheflogo from "../img/cheflogo.png";
 import { useState } from "react";
-
+import { getRandom } from "../api/getRandom";
 export default function Header() {
   const navigate = useNavigate();
   const [term, setTerm] = useState<string>("");
@@ -11,6 +11,12 @@ export default function Header() {
     navigate(`/search/${term}`);
     setTerm("")
   };
+
+  const handleRandom = async() => {
+    const {idMeal} = await getRandom();
+
+    navigate(`/detail/${idMeal}`)
+  }
   return (
     <div className="container bg-[#c9945b] w-full h-36 rounded-t-3xl flex justify-center items-center relative">
       <div className="text-6xl cursor-pointer pl-10 font-patrick text-[#fcf4d3]">
@@ -24,7 +30,7 @@ export default function Header() {
         <div className="mx-4 cursor-pointer">
           <Link to="/favorite">FAVORITE</Link>
         </div>
-        <div className="mx-4 cursor-pointer">RANDOM MEAL</div>
+        <div className="mx-4 cursor-pointer" onClick={handleRandom}>RANDOM MEAL</div>
 
         <form onSubmit={handleSubmitSearch} className="flex items-center">
           <div className="mx-4">

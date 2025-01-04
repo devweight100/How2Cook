@@ -11,7 +11,7 @@ const FavoritePage = () => {
   
     return (
       <div className="bg-[#f6e5bf] p-20 flex justify-center container w-full rounded-b-3xl ">
-        <div className="flex flex-wrap w-full px-12 gap-10 items-center ">
+        <div className="flex flex-wrap w-full px-12 gap-10 items-center justify-center">
           {likeIds.map((meal) => (
             <CardMeal key={meal.idMeal} meal={meal} />
           ))}

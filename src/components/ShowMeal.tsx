@@ -47,7 +47,7 @@ function ShowMeal() {
   useEffect(() => {
     getMeal()
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setMeal(data.categories);
       })
       .then(() => {
@@ -98,7 +98,7 @@ function ShowMeal() {
     );
   });
   return (
-    <div className="flex flex-wrap items-center w-full gap-10 mx-auto">
+    <div className="flex flex-wrap items-center justify-center w-full gap-10 mx-auto">
       {loading ? "Loading..." : mealList}
     </div>
   );

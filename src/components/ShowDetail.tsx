@@ -1,5 +1,7 @@
 import { detailMeal } from "@/api/type/MealId";
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "./ui/table";
+import { useState, useContext, useEffect } from "react";
+import MealContext, { MealContextType } from "./context/Meals";
 
 interface ShowDetailProps {
   props: detailMeal;
@@ -24,6 +26,24 @@ export default function ShowDetail({ props }: ShowDetailProps) {
       }
     })
     .filter(Boolean);
+  
+   const [isLiked, setIsLiked] = useState(false);
+   const { likeIds, setLikeIds } = useContext<MealContextType>(MealContext);
+
+   const handleLike = () => {
+     setIsLiked(!isLiked);
+     if (!isLiked) {
+       setLikeIds([...likeIds, props]);
+     } else {
+       setLikeIds(likeIds.filter((ele) => ele.idMeal !== props.idMeal));
+     }
+   };
+   useEffect(() => {
+     // console.log(likeIds);
+     if (likeIds.some((like) => like.idMeal === props.idMeal)) {
+       setIsLiked(true);
+     }
+   }, [likeIds.length]);
   return (
     <div>
       <div className="flex justify-center w-[30%] mx-auto pb-5">
@@ -38,6 +58,23 @@ export default function ShowDetail({ props }: ShowDetailProps) {
         <h1 className="text-3xl cursor-pointer pl-10 font-patrick text-[#645414]">
           {props.strMeal}
         </h1>
+        <div
+          className="flex items-center mx-2"
+          onClick={() => handleLike()}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={isLiked ? "red" : "none"}
+            stroke="red"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-8 h-8"
+          >
+            <path d="M20.8 4.6a5.4 5.4 0 00-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 00-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 000-7.6z" />
+          </svg>
+        </div>
       </div>
 
       <p className="indent-20 font-patrick text-[#493f18]">
@@ -67,14 +104,19 @@ export default function ShowDetail({ props }: ShowDetailProps) {
           </h1>
           <Table className="p-5 my-5 text-center border-2 border-collapse border-solid border-amber-700">
             <TableHeader className="text-xl border-2 border-collapse border-solid font-patrick text-bold text-amber-700 border-amber-700">
-              <TableCell className="border-2 border-solid border-amber-700">
-                Ingredients
-              </TableCell>
-              <TableCell>Measure</TableCell>
+              <TableRow>
+                <TableCell className="border-2 border-solid border-amber-700">
+                  Ingredients
+                </TableCell>
+                <TableCell>Measure</TableCell>
+              </TableRow>
             </TableHeader>
             <TableBody className="text-base font-patrick text-[#493f18] ">
-              {ingredients.map((ingre) => (
-                <TableRow key={ingre?.ingredient} className="border-0">
+              {ingredients.map((ingre, i) => (
+                <TableRow
+                  key={ingre?.ingredient?.concat(`${i}`)}
+                  className="border-0"
+                >
                   <TableCell className="border-solid border-x border-amber-700">
                     <div className="flex justify-center">
                       <img
