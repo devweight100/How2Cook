@@ -42,7 +42,7 @@ export default function CardMeal({ meal }: CardMealProps) {
   return (
     <Card
       key={meal.idMeal}
-      className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-4 flex flex-col w-72 h-96"
+      className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-4 flex flex-col w-72 h-96 transition-transform duration-300  hover:scale-105 cursor-pointer hover:shadow-2xl"
     >
       <CardHeader className="flex flex-col">
         <Link to={`/detail/${meal.idMeal}`}>

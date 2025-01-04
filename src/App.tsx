@@ -9,44 +9,43 @@ import CategoriesPage from "./pages/CategoriesPage";
 import getCategory from "./api/getCategory";
 import { getId } from "./api/getId";
 
-import { useContext } from "react";
-import MealContext,{MealContextType} from "./components/context/Meals";
-
+import { getSearch } from "./api/getSearch";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Root />,
     children: [
       {
         index: true,
         element: <HomePage />,
-      }, {
-        path: '/search',
+      },
+      {
+        path: "/search/:term",
         element: <SearchPage />,
+        loader: getSearch,
       },
       {
-        path: '/favorite',
+        path: "/favorite",
         element: <FavoritePage />,
-      
       },
       {
-        path: '/detail/:id',
+        path: "/detail/:id",
         element: <DetailPage />,
-        loader:getId
-      }, {
-        path: '/categories',
+        loader: getId,
+      },
+      {
+        path: "/categories",
         element: <CategoriesPage />,
-        loader: getCategory
-      }
-    ]
-  }
+        loader: getCategory,
+      },
+    ],
+  },
 ]);
 
 export const App = () => {
-
   return (
-    <div className="flex justify-center bg-amber-100 p-12 min-h-screen w-full">
+    <div className="flex justify-center w-full min-h-screen p-12 bg-amber-100">
       <RouterProvider router={router} />
     </div>
   );

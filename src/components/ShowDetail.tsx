@@ -26,7 +26,7 @@ export default function ShowDetail({ props }: ShowDetailProps) {
     .filter(Boolean);
   return (
     <div>
-      <div className="flex justify-center w-[30%] mx-auto ">
+      <div className="flex justify-center w-[30%] mx-auto pb-5">
         <img
           className="rounded-3xl"
           src={props.strMealThumb}
@@ -61,13 +61,13 @@ export default function ShowDetail({ props }: ShowDetailProps) {
         </div>
       )}
       {ingredients.length > 0 ? (
-        <div className="px-40 mt-2 text-center">
+        <div className="mt-2 text-center px-60">
           <h1 className="text-2xl underline text-bold font-patrick text-amber-900">
             Ingredients Table
           </h1>
-          <Table className="p-5 my-5 text-center border border-collapse border-solid border-amber-700">
-            <TableHeader className="text-xl border border-collapse border-solid font-patrick text-bold text-amber-700 border-amber-700">
-              <TableCell className="border border-solid border-amber-700">
+          <Table className="p-5 my-5 text-center border-2 border-collapse border-solid border-amber-700">
+            <TableHeader className="text-xl border-2 border-collapse border-solid font-patrick text-bold text-amber-700 border-amber-700">
+              <TableCell className="border-2 border-solid border-amber-700">
                 Ingredients
               </TableCell>
               <TableCell>Measure</TableCell>
@@ -76,7 +76,12 @@ export default function ShowDetail({ props }: ShowDetailProps) {
               {ingredients.map((ingre) => (
                 <TableRow key={ingre?.ingredient} className="border-0">
                   <TableCell className="border-solid border-x border-amber-700">
-                    {ingre?.ingredient}
+                    <div className="flex justify-center">
+                      <img
+                        src={`https://www.themealdb.com/images/ingredients/${ingre?.ingredient}-Small.png`}
+                      />
+                    </div>
+                    <div>{ingre?.ingredient}</div>
                   </TableCell>
                   <TableCell>{ingre?.measure}</TableCell>
                 </TableRow>

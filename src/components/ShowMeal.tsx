@@ -21,7 +21,7 @@ function ShowMeal() {
   const [meal, setMeal] = useState<CATEGORIES[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState(false);
+  // const [isLiked, setIsLiked] = useState(false);
   const handleView = (c: string) => {
     navigate(`/categories?category=${c}`);
   };
@@ -66,15 +66,15 @@ function ShowMeal() {
   const mealList = meal.map((item: CATEGORIES) => {
     return (
       <Card
+        onClick={() => handleView(item.strCategory)}
         key={item.idCategory}
-        className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-4 flex flex-col w-72 h-100"
+        className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-4 flex flex-col w-72 h-100 transition-transform duration-300  hover:scale-105 cursor-pointer hover:shadow-2xl"
       >
         <CardHeader className="flex flex-col">
           <img
             className="w-56 rounded-lg cursor-pointer"
             src={`/src/img/${item.strCategory}.png`}
             alt={item.strCategory}
-            onClick={() => handleView(item.strCategory)}
           />
           <CardTitle className="text-2xl text-center cursor-pointer pl-4 font-patrick  text-[#735e3c]">
             {item.strCategory}

@@ -1,8 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import cheflogo from "../img/cheflogo.png";
+import { useState } from "react";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const [term, setTerm] = useState<string>("");
+  const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/search/${term}`);
+  };
   return (
     <div className="container bg-[#c9945b] w-full h-36 rounded-t-3xl flex justify-center items-center relative">
       <div className="text-6xl cursor-pointer pl-10 font-patrick text-[#fcf4d3]">
@@ -18,17 +25,21 @@ export default function Header() {
         </div>
         <div className="mx-4 cursor-pointer">RANDOM MEAL</div>
 
-        <div className="mx-4">
-          <input
-            type="text"
-            className="bg-transparent border-4 border-[fcf4d3] outline-none w-full p-2 border-solid rounded-lg"
-          />
-        </div>
-        <div className="">
-          <Button className="bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2">
-            SEARCH
-          </Button>
-        </div>
+        <form onSubmit={handleSubmitSearch} className="flex items-center">
+          <div className="mx-4">
+            <input
+              type="text"
+              className="bg-transparent border-4 border-[fcf4d3] outline-none w-full p-2 border-solid rounded-lg"
+              onChange={(e) => setTerm(e.target.value)}
+              value={term}
+            />
+          </div>
+          <div>
+            <Button className="bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2">
+              SEARCH
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   );
