@@ -1,12 +1,13 @@
 export interface MealId {
-  meals: detailMeal[];
+  meals: detailMeal;
 }
 
-interface detailMeal{
+export interface detailMeal{
+      key: string;
     
       idMeal: string;
       strMeal: string;
-      strDrinkAlternate: null;
+      strDrinkAlternate: null|string;
       strCategory: string;
       strArea: string;
       strInstructions: string;
@@ -28,11 +29,11 @@ interface detailMeal{
       strIngredient13: string;
       strIngredient14: string;
       strIngredient15: string;
-      strIngredient16: null;
-      strIngredient17: null;
-      strIngredient18: null;
-      strIngredient19: null;
-      strIngredient20: null;
+      strIngredient16: null|string;
+      strIngredient17: null|string;
+      strIngredient18: null|string;
+      strIngredient19: null|string;
+      strIngredient20: null|string;
       strMeasure1: string;
       strMeasure2: string;
       strMeasure3: string;
@@ -48,14 +49,14 @@ interface detailMeal{
       strMeasure13: string;
       strMeasure14: string;
       strMeasure15: string;
-      strMeasure16: null;
-      strMeasure17: null;
-      strMeasure18: null;
-      strMeasure19: null;
-      strMeasure20: null;
-      strSource: null;
-      strImageSource: null;
-      strCreativeCommonsConfirmed: null;
-      dateModified: null;
+      strMeasure16: null|string;
+      strMeasure17: null|string;
+      strMeasure18: null|string;
+      strMeasure19: null|string;
+      strMeasure20: null|string;
+      strSource: null|string;
+      strImageSource: null|string;
+      strCreativeCommonsConfirmed: null|string;
+      dateModified: null|string;
  
 }

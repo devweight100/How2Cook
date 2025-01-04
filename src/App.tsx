@@ -7,7 +7,7 @@ import DetailPage from "./pages/DetailPage";
 import CategoriesPage from "./pages/CategoriesPage";
 
 import getCategory from "./api/getCategory";
-
+import { getId } from "./api/getId";
 
 import { useContext } from "react";
 import MealContext,{MealContextType} from "./components/context/Meals";
@@ -32,7 +32,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/detail/:id',
-        element: <DetailPage />
+        element: <DetailPage />,
+        loader:getId
       }, {
         path: '/categories',
         element: <CategoriesPage />,
