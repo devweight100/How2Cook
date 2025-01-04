@@ -9,6 +9,7 @@ export default function Header() {
   const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search/${term}`);
+    setTerm("")
   };
   return (
     <div className="container bg-[#c9945b] w-full h-36 rounded-t-3xl flex justify-center items-center relative">

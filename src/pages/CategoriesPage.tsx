@@ -16,7 +16,7 @@ const CategoriesPage = () => {
   }, [data.length]);
   return (
     <div className="bg-[#f6e5bf] mx-auto flex justify-center container p-12 w-full rounded-b-3xl">
-      <div className="flex flex-wrap items-center w-full gap-10 mx-auto ">
+      <div className="flex flex-wrap items-center w-full gap-10 mx-auto justify-center">
         {loading ? "Loading..." : card}
       </div>
     </div>
