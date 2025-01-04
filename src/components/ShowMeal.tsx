@@ -22,9 +22,9 @@ function ShowMeal() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(false);
-  const handleView = (c:string) => {
-    navigate(`/categories?category=${c}`)
-  }
+  const handleView = (c: string) => {
+    navigate(`/categories?category=${c}`);
+  };
 
   const mealArr = [
     "Beef",
@@ -71,9 +71,10 @@ function ShowMeal() {
       >
         <CardHeader className="flex flex-col">
           <img
-            className="w-56 rounded-lg"
+            className="w-56 rounded-lg cursor-pointer"
             src={`/src/img/${item.strCategory}.png`}
             alt={item.strCategory}
+            onClick={() => handleView(item.strCategory)}
           />
           <CardTitle className="text-2xl text-center cursor-pointer pl-4 font-patrick  text-[#735e3c]">
             {item.strCategory}
@@ -86,7 +87,6 @@ function ShowMeal() {
         </CardHeader>
 
         <CardFooter className="relative h-full">
-       
           <Button
             className="absolute bottom-0 right-0 bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2"
             onClick={() => handleView(item.strCategory)}
@@ -98,7 +98,7 @@ function ShowMeal() {
     );
   });
   return (
-    <div className="flex flex-wrap w-full px-12 gap-10 items-center">
+    <div className="flex flex-wrap items-center w-full gap-10 mx-auto">
       {loading ? "Loading..." : mealList}
     </div>
   );

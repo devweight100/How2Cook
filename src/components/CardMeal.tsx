@@ -1,34 +1,27 @@
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { MealType } from "@/api/type/MealType";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import MealContext,{ MealContextType } from "./context/Meals";
-import { set } from "date-fns";
+import MealContext, { MealContextType } from "./context/Meals";
 import { Link } from "react-router-dom";
 
-interface CardMealProps{
-  meal: MealType,
+interface CardMealProps {
+  meal: MealType;
 }
 
-export default function CardMeal({meal}:CardMealProps) {
+export default function CardMeal({ meal }: CardMealProps) {
   const [isLiked, setIsLiked] = useState(false);
   const { likeIds, setLikeIds } = useContext<MealContextType>(MealContext);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
     if (!isLiked) {
-      setLikeIds([...likeIds, meal])
+      setLikeIds([...likeIds, meal]);
     } else {
-      setLikeIds(likeIds.filter((ele) => ele.idMeal !== meal.idMeal))
+      setLikeIds(likeIds.filter((ele) => ele.idMeal !== meal.idMeal));
     }
-  }
+  };
   useEffect(() => {
     // console.log(likeIds);
     if (likeIds.some((like) => like.idMeal === meal.idMeal)) {
@@ -36,7 +29,7 @@ export default function CardMeal({meal}:CardMealProps) {
     }
   }, [likeIds.length]);
   // useEffect(() => {
-    
+
   //   if (isLiked) {
   //     setLikeIds([...likeIds, meal]);
   //   } else if (!isLiked ) {
@@ -52,11 +45,13 @@ export default function CardMeal({meal}:CardMealProps) {
       className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-4 flex flex-col w-72 h-96"
     >
       <CardHeader className="flex flex-col">
-        <img
-          className="w-56 rounded-lg"
-          src={meal.strMealThumb}
-          alt={meal.strMeal}
-        />
+        <Link to={`/detail/${meal.idMeal}`}>
+          <img
+            className="w-56 rounded-lg"
+            src={meal.strMealThumb}
+            alt={meal.strMeal}
+          />
+        </Link>
         <CardTitle className="text-lg text-center cursor-pointer  font-patrick  text-[#735e3c]">
           {meal.strMeal.length > 36
             ? meal.strMeal.slice(0, 33).concat("...")
@@ -67,7 +62,7 @@ export default function CardMeal({meal}:CardMealProps) {
       <CardFooter className="relative h-full">
         <div
           onClick={() => handleLike()}
-          className="hover:cursor-pointer bottom-0 left-1 absolute"
+          className="absolute bottom-0 hover:cursor-pointer left-1"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,10 +78,7 @@ export default function CardMeal({meal}:CardMealProps) {
           </svg>
         </div>
         <Link to={`/detail/${meal.idMeal}`}>
-          <Button
-            className="absolute bottom-0 right-0 bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2"
-            
-          >
+          <Button className="absolute bottom-0 right-0 bg-[#9d784a] border-[#b39561] cursor-pointer hover:bg-yellow-700 border-solid border-2">
             View Detail
           </Button>
         </Link>

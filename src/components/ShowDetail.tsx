@@ -1,29 +1,37 @@
-import { detailMeal } from "@/api/type/MealId"
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./ui/table";
-interface ShowDetailProps { 
-    props:detailMeal
+import { detailMeal } from "@/api/type/MealId";
+import { Table, TableBody, TableCell, TableHeader, TableRow } from "./ui/table";
+
+interface ShowDetailProps {
+  props: detailMeal;
 }
 
 export default function ShowDetail({ props }: ShowDetailProps) {
-    console.log(props)
-    const Ingredients = Object.keys(props).filter((key) => key.includes('strIngredient')) as Array<keyof detailMeal>
-     const Measure = Object.keys(props).filter((key) =>
-       key.includes("strMeasure")
-     ) as Array<keyof detailMeal>;
- 
+  const keyIngredients = Object.keys(props).filter((key) =>
+    key.includes("strIngredient")
+  ) as Array<keyof detailMeal>;
+  const keyMeasure = Object.keys(props).filter((key) =>
+    key.includes("strMeasure")
+  ) as Array<keyof detailMeal>;
+
+  const ingredients = keyIngredients
+    .map((key, i) => {
+      const measure = props[keyMeasure[i]]?.trim();
+      if (measure) {
+        return {
+          ingredient: props[key],
+          measure: props[keyMeasure[i]],
+        };
+      }
+    })
+    .filter(Boolean);
   return (
     <div>
-      <div className="flex justify-center w-[30%] mx-auto">
-        <img src={props.strMealThumb} alt={props.strMeal} />
+      <div className="flex justify-center w-[30%] mx-auto ">
+        <img
+          className="rounded-3xl"
+          src={props.strMealThumb}
+          alt={props.strMeal}
+        />
       </div>
 
       <div className="flex justify-center my-5">
@@ -52,24 +60,31 @@ export default function ShowDetail({ props }: ShowDetailProps) {
           ></iframe>
         </div>
       )}
-      <Table className="w-[50%] mx-auto h-[50%] text-center">
-        
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Ingredien</TableHead>
-            <TableHead>Measure</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {Ingredients.map((key,i) => (
-            <TableRow key={key}>
-                  <TableCell>{props[key]}</TableCell>
-                  <TableCell>{props[Measure[i]]}</TableCell>
-            </TableRow>
-          ))}
-         
-        </TableBody>
-      </Table>
+      {ingredients.length > 0 ? (
+        <div className="px-40 mt-2 text-center">
+          <h1 className="text-2xl underline text-bold font-patrick text-amber-900">
+            Ingredients Table
+          </h1>
+          <Table className="p-5 my-5 text-center border border-collapse border-solid border-amber-700">
+            <TableHeader className="text-xl border border-collapse border-solid font-patrick text-bold text-amber-700 border-amber-700">
+              <TableCell className="border border-solid border-amber-700">
+                Ingredients
+              </TableCell>
+              <TableCell>Measure</TableCell>
+            </TableHeader>
+            <TableBody className="text-base font-patrick text-[#493f18] ">
+              {ingredients.map((ingre) => (
+                <TableRow key={ingre?.ingredient} className="border-0">
+                  <TableCell className="border-solid border-x border-amber-700">
+                    {ingre?.ingredient}
+                  </TableCell>
+                  <TableCell>{ingre?.measure}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      ) : null}
     </div>
   );
 }
