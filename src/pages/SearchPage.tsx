@@ -10,7 +10,7 @@ const SearchPage = () => {
   const [loading, setLoading] = useState<Boolean>(true);
   const [isFound, setIsFound] = useState<Boolean>(true);
   const notFound = <div className="text-xl font-patrick font-bold text-amber-900">Not Found</div>;
-  console.log(data);
+  // console.log(data);
   useEffect(() => {
     if (card.length !== 0) {
       setLoading(false);

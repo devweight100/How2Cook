@@ -23,12 +23,14 @@ export default function CardMeal({ meal }: CardMealProps) {
     }
   };
   useEffect(() => {
-    window.scrollTo(0, 0);
+    
     if (likeIds.some((like) => like.idMeal === meal.idMeal)) {
       setIsLiked(true);
     }
   }, [likeIds.length]);
-
+  useEffect(() => {
+  window.scrollTo(0, 0);
+},[])
   return (
     <Card
       key={meal.idMeal}

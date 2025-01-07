@@ -67,9 +67,9 @@ function ShowMeal() {
       <Card
         onClick={() => handleView(item.strCategory)}
         key={item.idCategory}
-        className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-4 flex flex-col w-72 h-100 transition-transform duration-300  hover:scale-105 cursor-pointer hover:shadow-2xl"
+        className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-4 flex flex-col w-72 min-h-[415px] transition-transform duration-300  hover:scale-105 cursor-pointer hover:shadow-2xl"
       >
-        <CardHeader className="flex flex-col">
+        <CardHeader className="flex flex-col min-h-[352px]">
           <img
             className="w-56 rounded-lg cursor-pointer"
             src={`/src/img/${item.strCategory}.png`}

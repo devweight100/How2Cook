@@ -8,6 +8,7 @@ export interface MealContextType {
   setLikeIds: React.Dispatch<React.SetStateAction<MealType[]>>;
   data: MealType[];
   setData: React.Dispatch<React.SetStateAction<MealType[]>>;
+ 
 }
 
 interface ProviderProps {
@@ -18,12 +19,14 @@ const MealContext = createContext<MealContextType>({
   likeIds: [],
   setLikeIds: () => { },
   data: [],
-  setData: () => { },
+  setData: () => { }
+ 
 });
 
 function Provider({ children }: ProviderProps) {
   const [likeIds, setLikeIds] = useState<MealType[]>([]);
   const [data, setData] = useState<MealType[]>([]);
+ 
   return (
     <MealContext.Provider value={{ likeIds, setLikeIds,data,setData }}>
       {children}

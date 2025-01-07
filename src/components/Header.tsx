@@ -1,16 +1,22 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import cheflogo from "../img/cheflogo.png";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getRandom } from "../api/getRandom";
+
+
 export default function Header() {
   const navigate = useNavigate();
+  
   const [term, setTerm] = useState<string>("");
   const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search/${term}`);
     setTerm("");
   };
+  useEffect(() => {
+    setTerm(""); 
+  },[navigate])
 
   const handleRandom = async () => {
     const { idMeal } = await getRandom();
@@ -18,7 +24,7 @@ export default function Header() {
     navigate(`/detail/${idMeal}`);
   };
   return (
-    <div className="container bg-[#c9945b] w-full lg:h-36 rounded-t-3xl flex justify-center items-center relative lg:flex-row flex-col">
+    <div className="container bg-[#c9945b] lg:w-[1536px] w-full lg:h-36 lg:rounded-t-3xl flex justify-center items-center relative lg:flex-row flex-col ">
       <div className="hidden lg:block text-4xl pl-4 font-patrick cursor-pointer text-[#fcf4d3]">
         <Link to="/">How2Cooking</Link>
       </div>
@@ -44,7 +50,7 @@ export default function Header() {
           <div className="w-full mx-4 my-2 lg:w-auto lg:my-0">
             <input
               type="text"
-              className="bg-transparent border-4 border-[#fcf4d3] outline-none lg:w-full w-full p-2 border-solid rounded-lg text-sm lg:text-lg"
+              className="bg-transparent font-patrick text-[#fcf4d3] border-4 border-[#fcf4d3] outline-none lg:w-full w-full p-2 border-solid rounded-lg text-sm lg:text-lg"
               onChange={(e) => setTerm(e.target.value)}
               value={term}
             />
