@@ -8,6 +8,39 @@ interface ShowDetailProps {
 }
 
 export default function ShowDetail({ props }: ShowDetailProps) {
+  const AREA = {
+    America: "us",
+    British: "uk",
+    Canadian: "ca",
+    Chinese: "cn",
+    Croatian: "hr",
+    Dutch: "nl",
+    Egyptian: "eg",
+    Filipino: "ph",
+    French: "fr",
+    Greek: "gr",
+    Indian: "in",
+    Irish: "ie",
+    Italian: "it",
+    Jamaican: "jm",
+    Japanese: "jp",
+    Kenyan: "ke",
+    Malaysian: "my",
+    Mexican: "mx",
+    Moroccan: "ma",
+    Polish: "pl",
+    Portuguese: "pt",
+    Russian: "ru",
+    Spanish: "es",
+    Thai: "th",
+    Tunisian: "tn",
+    Turkish: "tr",
+    Ukrainian: "ua",
+    Unknown: "xx",
+    Vietnamese: "vn",
+  };
+
+  const flag = AREA[props.strArea as keyof typeof AREA];
   const keyIngredients = Object.keys(props).filter((key) =>
     key.includes("strIngredient")
   ) as Array<keyof detailMeal>;
@@ -48,18 +81,14 @@ export default function ShowDetail({ props }: ShowDetailProps) {
     <div>
       <div className="flex">
         <div className="w-[70%] pr-16">
-          <div className="flex justify-center w-[40%] mx-auto pb-5">
-            <img
-              className="rounded-3xl"
-              src={props.strMealThumb}
-              alt={props.strMeal}
-            />
-          </div>
-
           <div className="flex justify-center my-5">
-            <h1 className="text-2xl pl-10 font-patrick cursor-default text-[#645414]">
+            <img
+              src={`https://www.themealdb.com/images/icons/flags/big/64/${flag}.png`}
+            />
+            <h1 className="text-2xl pl-10 font-patrick cursor-default flex justify-center items-center text-[#645414]">
               {props.strMeal}
             </h1>
+
             <div
               className="flex items-center mx-2 cursor-pointer"
               onClick={() => handleLike()}
@@ -77,6 +106,14 @@ export default function ShowDetail({ props }: ShowDetailProps) {
                 <path d="M20.8 4.6a5.4 5.4 0 00-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 00-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 000-7.6z" />
               </svg>
             </div>
+          </div>
+
+          <div className="flex justify-center w-[40%] mx-auto pb-5">
+            <img
+              className="rounded-3xl"
+              src={props.strMealThumb}
+              alt={props.strMeal}
+            />
           </div>
 
           <p className="indent-20 font-patrick text-sm text-[#493f18]">
