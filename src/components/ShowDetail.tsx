@@ -1,4 +1,4 @@
-import { detailMeal } from "@/api/type/MealId";
+import { detailMeal } from "@/api/type/MealType";
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "./ui/table";
 import { useState, useContext, useEffect } from "react";
 import MealContext, { MealContextType } from "./context/Meals";

@@ -1,4 +1,4 @@
-import { detailMeal, MealId } from "@/api/type/MealId";
+
 import { useLoaderData } from "react-router-dom";
 import CardMeal from "@/components/CardMeal";
 import { MealType } from "@/api/type/MealType";

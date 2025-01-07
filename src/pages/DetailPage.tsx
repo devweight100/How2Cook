@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { detailMeal } from "@/api/type/MealId";
+import { detailMeal } from "@/api/type/MealType";
 import ShowDetail from "@/components/ShowDetail";
 
 const DetailPage = () => {

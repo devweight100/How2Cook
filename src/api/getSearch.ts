@@ -1,7 +1,7 @@
-import { de } from "date-fns/locale";
-import { detailMeal, MealId } from "./type/MealId";
+
+import { detailMeal,MealType} from "./type/MealType";
 import { Params } from "react-router-dom";
-import { MealType } from "./type/MealType";
+
 interface Par {
   params: Params;
 }

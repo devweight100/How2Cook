@@ -1,5 +1,5 @@
-import { MealId } from "./type/MealId";
-import { detailMeal } from "./type/MealId";
+import { MealId } from "./type/MealType";
+
 import type { Params } from "react-router-dom";
 
 export async function getId({ params }: { params: Params }): Promise<MealId> {

@@ -1,5 +1,5 @@
 import { MealType } from "@/api/type/MealType";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext,  useState } from "react";
 
 import { ReactNode } from "react";
 
