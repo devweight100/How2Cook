@@ -47,7 +47,6 @@ function ShowMeal() {
   useEffect(() => {
     getMeal()
       .then((data) => {
-        // console.log(data);
         setMeal(data.categories);
       })
       .then(() => {

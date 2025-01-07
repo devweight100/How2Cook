@@ -23,21 +23,11 @@ export default function CardMeal({ meal }: CardMealProps) {
     }
   };
   useEffect(() => {
-    // console.log(likeIds);
+    window.scrollTo(0, 0);
     if (likeIds.some((like) => like.idMeal === meal.idMeal)) {
       setIsLiked(true);
     }
   }, [likeIds.length]);
-  // useEffect(() => {
-
-  //   if (isLiked) {
-  //     setLikeIds([...likeIds, meal]);
-  //   } else if (!isLiked ) {
-  //     const updatedLike = likeIds.filter((ele) => ele.idMeal !== meal.idMeal);
-  //     console.log(updatedLike);
-  //     setLikeIds(updatedLike);
-  //   }
-  // }, [isLiked]);
 
   return (
     <Card

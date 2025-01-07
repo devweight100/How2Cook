@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const CategoriesPage = () => {
   const data: MealType[] = useLoaderData();
   const [loading, setLoading] = useState(true);
-  // const card = data.map((meal)=>CardMeal(meal))
+
   const card = data.map((meal) => <CardMeal key={meal.idMeal} meal={meal} />);
 
   useEffect(() => {
