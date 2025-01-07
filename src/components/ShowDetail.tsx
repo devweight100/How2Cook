@@ -10,7 +10,7 @@ interface ShowDetailProps {
 export default function ShowDetail({ props }: ShowDetailProps) {
   const AREA = {
     America: "us",
-    British: "uk",
+    British: "gb",
     Canadian: "ca",
     Chinese: "cn",
     Croatian: "hr",
@@ -73,6 +73,7 @@ export default function ShowDetail({ props }: ShowDetailProps) {
   };
   useEffect(() => {
     // console.log(likeIds);
+    window.scrollTo(0, 0);
     if (likeIds.some((like) => like.idMeal === props.idMeal)) {
       setIsLiked(true);
     }
@@ -82,9 +83,12 @@ export default function ShowDetail({ props }: ShowDetailProps) {
       <div className="flex">
         <div className="w-[70%] pr-16">
           <div className="flex justify-center my-5">
-            <img
-              src={`https://www.themealdb.com/images/icons/flags/big/64/${flag}.png`}
-            />
+            {flag !== "xx" && (
+              <img
+                src={`https://www.themealdb.com/images/icons/flags/big/64/${flag}.png`}
+                alt={`${props.strArea}`}
+              />
+            )}
             <h1 className="text-2xl pl-10 font-patrick cursor-default flex justify-center items-center text-[#645414]">
               {props.strMeal}
             </h1>
