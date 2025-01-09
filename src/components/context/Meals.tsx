@@ -1,6 +1,6 @@
 import { MealType } from "@/api/type/MealType";
 import React, { createContext,  useEffect,  useState } from "react";
-import getDb,{postData,deleteData} from "@/api/getDb";
+import getDb from "@/api/getDb";
 import { ReactNode } from "react";
 
 export interface MealContextType {

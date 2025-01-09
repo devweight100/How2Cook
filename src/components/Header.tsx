@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import cheflogo from "../img/cheflogo.png";
 import { useContext, useEffect, useState } from "react";

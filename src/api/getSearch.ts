@@ -6,7 +6,7 @@ interface Par {
   params: Params;
 }
 
-export async function getSearch({ params }: Par): Promise<MealType[]> {
+export async function getSearch({ params }: Par) {
   const search = params.term;
   let result: MealType[] = [];
   try {
@@ -22,5 +22,5 @@ export async function getSearch({ params }: Par): Promise<MealType[]> {
     result = [];
   }
 
-  return result as MealType[];
+  return {data :result as MealType[],search :search as string};
 }

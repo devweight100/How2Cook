@@ -1,3 +1,28 @@
 {
-  "likeIds": []
+  "likeIds": [
+    {
+      "id": "596d",
+      "idMeal": "53010",
+      "strMeal": "Lamb Tzatziki Burgers",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/k420tj1585565244.jpg"
+    },
+    {
+      "id": "e49a",
+      "idMeal": "52968",
+      "strMeal": "Mbuzi Choma (Roasted Goat)",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/cuio7s1555492979.jpg"
+    },
+    {
+      "id": "b907",
+      "idMeal": "53064",
+      "strMeal": "Fettuccine Alfredo",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"
+    },
+    {
+      "id": "96ae",
+      "idMeal": "52835",
+      "strMeal": "Fettucine alfredo",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/uquqtu1511178042.jpg"
+    }
+  ]
 }
