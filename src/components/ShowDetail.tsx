@@ -81,8 +81,10 @@ export default function ShowDetail({ props }: ShowDetailProps) {
     window.scrollTo(0, 0);
     if (likeIds.some((like) => like.idMeal === props.idMeal)) {
       setIsLiked(true);
+    } else {
+      setIsLiked(false)
     }
-  }, [likeIds.length]);
+  }, [likeIds.length,props]);
   return (
     <div className="flex flex-col justify-center lg:flex-row px-4">
       <div className="lg:w-[70%] mx-auto lg:pr-16">
