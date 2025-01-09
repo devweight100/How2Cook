@@ -40,7 +40,7 @@ export default function Header() {
         <div className="mx-4 cursor-pointer relative">
           <Link to="/favorite">FAVORITE</Link>
           {likeIds.length > 0 && (
-            <div className="absolute top-[24px] left-[92px] bg-[#78350f] p-1 w-6 h-6 rounded-full text-center text-xs font-bold">
+            <div className="absolute left-[65px] top-[10px] lg:top-[24px] lg:left-[92px] lg:bg-[#78350f] p-1 w-6 h-6 rounded-full text-center text-xs font-bold text-white" >
               {likeIds.length}
             </div>
           )}
