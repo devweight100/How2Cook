@@ -2,6 +2,7 @@ import { detailMeal } from "@/api/type/MealType";
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "./ui/table";
 import { useState, useContext, useEffect } from "react";
 import MealContext, { MealContextType } from "./context/Meals";
+import getDb, { deleteData, postData } from "@/api/getDb";
 
 interface ShowDetailProps {
   props: detailMeal;
@@ -63,13 +64,17 @@ export default function ShowDetail({ props }: ShowDetailProps) {
   const [isLiked, setIsLiked] = useState(false);
   const { likeIds, setLikeIds } = useContext<MealContextType>(MealContext);
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    if (!isLiked) {
-      setLikeIds([...likeIds, props]);
-    } else {
-      setLikeIds(likeIds.filter((ele) => ele.idMeal !== props.idMeal));
-    }
+  const handleLike =async () => {
+   setIsLiked(!isLiked);
+       if (!isLiked) {
+         await postData(props)
+         setLikeIds(await getDb());
+       } else {
+         const id = likeIds.filter((ele) => ele.idMeal === props.idMeal)
+      
+         id[0].id&&await deleteData(id[0].id)
+         setLikeIds(await getDb());
+       }
   };
   useEffect(() => {
  

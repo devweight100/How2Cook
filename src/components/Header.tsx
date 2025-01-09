@@ -3,10 +3,12 @@ import { Button } from "../components/ui/button";
 import cheflogo from "../img/cheflogo.png";
 import { useContext, useEffect, useState } from "react";
 import { getRandom } from "../api/getRandom";
+import MealContext, { MealContextType } from "./context/Meals";
 
 
 export default function Header() {
   const navigate = useNavigate();
+  const { likeIds } = useContext<MealContextType>(MealContext)
   
   const [term, setTerm] = useState<string>("");
   const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,8 +37,13 @@ export default function Header() {
       </div>
 
       <div className="text-sm lg:text-lg pr-4 font-patrick justify-center items-center text-[#fcf4d3] flex">
-        <div className="mx-4 cursor-pointer">
+        <div className="mx-4 cursor-pointer relative">
           <Link to="/favorite">FAVORITE</Link>
+          {likeIds.length > 0 && (
+            <div className="absolute top-[24px] left-[92px] bg-[#78350f] p-1 w-6 h-6 rounded-full text-center text-xs font-bold">
+              {likeIds.length}
+            </div>
+          )}
         </div>
         <div className="mx-4 cursor-pointer" onClick={handleRandom}>
           RANDOM MEAL

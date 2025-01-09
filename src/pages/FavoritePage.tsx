@@ -6,7 +6,7 @@ import CardMeal from "@/components/CardMeal";
 
 const FavoritePage = () => { 
     const { likeIds } = useContext<MealContextType>(MealContext);
-
+   
    
   
     return (

@@ -1,4 +1,5 @@
 export interface MealType {
+  id?: string;
     idMeal: string;
     strMeal: string;
     strMealThumb: string;

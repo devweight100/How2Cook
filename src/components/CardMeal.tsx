@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import MealContext, { MealContextType } from "./context/Meals";
 import { Link } from "react-router-dom";
+import getDb, { deleteData, postData } from "@/api/getDb";
 
 interface CardMealProps {
   meal: MealType;
@@ -14,16 +15,22 @@ export default function CardMeal({ meal }: CardMealProps) {
   const [isLiked, setIsLiked] = useState(false);
   const { likeIds, setLikeIds } = useContext<MealContextType>(MealContext);
 
-  const handleLike = () => {
+ 
+
+  const handleLike = async () => {
+    
     setIsLiked(!isLiked);
     if (!isLiked) {
-      setLikeIds([...likeIds, meal]);
+      await postData(meal)
+      setLikeIds(await getDb());
     } else {
-      setLikeIds(likeIds.filter((ele) => ele.idMeal !== meal.idMeal));
+      const id = likeIds.filter((ele) => ele.idMeal === meal.idMeal)
+      // id.map((ele) => ele.id && deleteData(ele.id))
+      id[0].id&&await deleteData(id[0].id)
+      setLikeIds(await getDb());
     }
   };
   useEffect(() => {
-    
     if (likeIds.some((like) => like.idMeal === meal.idMeal)) {
       setIsLiked(true);
     }

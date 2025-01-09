@@ -1,6 +1,6 @@
 import { MealType } from "@/api/type/MealType";
-import React, { createContext,  useState } from "react";
-
+import React, { createContext,  useEffect,  useState } from "react";
+import getDb,{postData,deleteData} from "@/api/getDb";
 import { ReactNode } from "react";
 
 export interface MealContextType {
@@ -26,13 +26,24 @@ const MealContext = createContext<MealContextType>({
 function Provider({ children }: ProviderProps) {
   const [likeIds, setLikeIds] = useState<MealType[]>([]);
   const [data, setData] = useState<MealType[]>([]);
+  
+  const fetchLike =async () => {
+    setLikeIds(await getDb())
+  }
+  useEffect(() => {
+    fetchLike();
+    // console.log(likeIds)
+  },[likeIds.length])
  
+
   return (
     <MealContext.Provider value={{ likeIds, setLikeIds,data,setData }}>
       {children}
     </MealContext.Provider>
   );
 }
+
+
 
 export default MealContext;
 export { Provider };
