@@ -86,8 +86,7 @@ export default function ShowDetail({ props }: ShowDetailProps) {
         }
   };
   useEffect(() => {
-    // setLikeIds([])
-    // console.log(likeIds)
+    
     window.scrollTo(0, 0);
     if (likeIds.some((like) => like.idMeal === props.idMeal)) {
       setIsLiked(true);
@@ -96,10 +95,7 @@ export default function ShowDetail({ props }: ShowDetailProps) {
     }
   }, [likeIds.length, props]);
   
-  useEffect(() => {
-    setLikeIds([])
-    console.log(likeIds)
-  },[])
+ 
   return (
     <div className="flex flex-col justify-center lg:flex-row px-4">
       <div className="lg:w-[70%] mx-auto lg:pr-16">
@@ -163,84 +159,36 @@ export default function ShowDetail({ props }: ShowDetailProps) {
           </div>
         )}
       </div>
-      <div className="lg:w-[30%]">
-        {/* {ingredients.length > 0 && (
-          <div className="">
-            <Table className="p-5 my-5 border-2 mx-auto w-[100%] border-solid border-amber-700">
-              <TableHeader className="text-lg border-2 border-collapse border-solid font-patrick text-bold text-amber-700 border-amber-700">
-                <TableRow>
-                  <TableCell className="text-center">Ingredients</TableCell>
-                  <TableCell className="text-center">Measure</TableCell>
-                </TableRow>
-              </TableHeader>
-              <TableBody className="text-lg font-patrick text-[#493f18] ">
-                {ingredients.map((ingre, i) => (
-                  <TableRow
-                    key={ingre?.ingredient?.concat(`${i}`)}
-                    className="h-0 border-b-0"
-                  >
-                    <TableCell className="flex p-2 justify-center ">
-                      <div className="lg:flex justify-center mx-6 hidden">
-                        <img
-                          className="object-cover w-12"
-                          src={`https://www.themealdb.com/images/ingredients/${ingre?.ingredient}-Small.png`}
-                        />
-                      </div>
-                      <div className="flex items-center justify-center lg:justify-start text-sm">
-                        {ingre?.ingredient}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm text-center">
-                      {ingre?.measure}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-           
-          </div>
-        ) */}
+      <div className="lg:w-[30%] font-patrick text-[#645414]">
         {ingredients.length > 0 && (
           <div className="">
-            <div className="p-5 my-5 border-2 mx-auto w-[100%] grid grid-cols-2 border-solid border-amber-700">
-              <div>Ingredients</div>
-              <div>Measure</div>
+            <div className="border-2 mx-auto w-[100%] grid text-center grid-cols-[2fr_1fr] gap-0 border-solid border-amber-700">
+              <div className="text-xl py-2 font-bold border-amber-700 border-solid border-b-2 border-r-2">
+                Ingredients
+              </div>
+              <div className="text-xl py-2 font-bold border-b-amber-700 border-solid border-b-2">
+                Measure
+              </div>
               {ingredients.map((ingre, i) => {
                 return (
                   <Fragment key={i}>
-                    <div>
-                      <img
-                        className="object-cover w-12"
-                        src={`https://www.themealdb.com/images/ingredients/${ingre?.ingredient}-Small.png`}
-                      />
-                    </div>
-                    <div>{ingre?.ingredient}</div>
-                  </Fragment>
-                );
-              })}
-              {/* <TableBody className="text-lg font-patrick text-[#493f18] ">
-                {ingredients.map((ingre, i) => (
-                  <TableRow
-                    key={ingre?.ingredient?.concat(`${i}`)}
-                    className="h-0 border-b-0"
-                  >
-                    <TableCell className="flex p-2 justify-center ">
-                      <div className="lg:flex justify-center mx-6 hidden">
+                    <div className="flex border-r-amber-700 border-solid border-r-2">
+                      <div>
                         <img
-                          className="object-cover w-12"
+                          className="object-cover w-12 m-2 "
                           src={`https://www.themealdb.com/images/ingredients/${ingre?.ingredient}-Small.png`}
                         />
                       </div>
-                      <div className="flex items-center justify-center lg:justify-start text-sm">
+                      <div className="flex justify-center items-center m-3">
                         {ingre?.ingredient}
                       </div>
-                    </TableCell>
-                    <TableCell className="text-sm text-center">
+                    </div>
+                    <div className="m-3 flex justify-center items-center">
                       {ingre?.measure}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody> */}
+                    </div>
+                  </Fragment>
+                );
+              })}
             </div>
           </div>
         )}
