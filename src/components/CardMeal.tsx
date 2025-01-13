@@ -1,11 +1,11 @@
 import { Card, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import { MealType } from "@/api/type/MealType";
+import { detailMeal, MealType } from "@/api/type/MealType";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import MealContext, { MealContextType } from "./context/Meals";
 import { Link } from "react-router-dom";
-import getDb, { deleteData, postData } from "@/api/getDb";
+
 
 interface CardMealProps {
   meal: MealType;
@@ -18,16 +18,29 @@ export default function CardMeal({ meal }: CardMealProps) {
  
 
   const handleLike = async () => {
-    
+    setLikeIds([])
+    console.log(likeIds)
     setIsLiked(!isLiked);
     if (!isLiked) {
-      await postData(meal)
-      setLikeIds(await getDb());
+       const list = window.localStorage.getItem("favList");
+       const preFav = list ? JSON.parse(list) : [];
+       const { idMeal, strMeal, strMealThumb } = meal;
+       const favId = { idMeal, strMeal, strMealThumb };
+
+       const favList = [...preFav, favId];
+       window.localStorage.setItem("favList", JSON.stringify(favList));
+       const showFav = window.localStorage.getItem("favList");
+       setLikeIds(showFav ? JSON.parse(showFav) : []);
     } else {
-      const id = likeIds.filter((ele) => ele.idMeal === meal.idMeal)
-      // id.map((ele) => ele.id && deleteData(ele.id))
-      id[0].id&&await deleteData(id[0].id)
-      setLikeIds(await getDb());
+          const list = window.localStorage.getItem("favList");
+                const favorite: detailMeal[] = list ? JSON.parse(list) : [];
+                const newFavorite = favorite.filter((ele) => ele.idMeal !== meal.idMeal)
+                window.localStorage.setItem("favList", JSON.stringify(newFavorite));
+            //  id[0].id&&await deleteData(id[0].id)
+            console.log(newFavorite)
+      setLikeIds(newFavorite);
+      
+      
     }
   };
   useEffect(() => {
@@ -36,8 +49,10 @@ export default function CardMeal({ meal }: CardMealProps) {
     }
   }, [likeIds.length]);
   useEffect(() => {
-  window.scrollTo(0, 0);
-},[])
+    // setLikeIds([]);
+
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Card
       key={meal.idMeal}

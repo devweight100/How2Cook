@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import CardMeal from "@/components/CardMeal";
 import { MealType } from "@/api/type/MealType";
 import { useState, useEffect } from "react";
+import HomePage from "./HomePage";
 
 const SearchPage = () => {
   const dataloader: {data:MealType[],search:string} = useLoaderData();
@@ -24,7 +25,8 @@ const SearchPage = () => {
   }, [data.length]);
 
   return (
-    <div className="bg-[#f6e5bf] mx-auto flex justify-center container p-12 w-full rounded-b-3xl flex-col">
+    <div className="bg-[#f6e5bf] mx-auto flex justify-center container pb-12 w-full rounded-b-3xl flex-col">
+      <HomePage/>
       <div className="w-full text-center font-patrick font-bold text-3xl mb-10 text-amber-900 underline underline-offset-4">
         <h1>{`Result from: ${search}`}</h1>
       </div>

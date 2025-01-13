@@ -1,6 +1,5 @@
 import { MealType } from "@/api/type/MealType";
 import React, { createContext,  useEffect,  useState } from "react";
-import getDb from "@/api/getDb";
 import { ReactNode } from "react";
 
 export interface MealContextType {
@@ -27,8 +26,10 @@ function Provider({ children }: ProviderProps) {
   const [likeIds, setLikeIds] = useState<MealType[]>([]);
   const [data, setData] = useState<MealType[]>([]);
   
-  const fetchLike =async () => {
-    setLikeIds(await getDb())
+  const fetchLike = async () => {
+    const favList = window.localStorage.getItem("favList")
+    const fav = favList ? JSON.parse(favList) : []; 
+    setLikeIds(fav)
   }
   useEffect(() => {
     fetchLike();

@@ -8,13 +8,14 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "json-server":"json-server --watch db.json --port 3001"
+    "json-server": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "embla-carousel-react": "^8.5.2",
     "json-server": "^1.0.0-beta.3",
     "lucide-react": "^0.469.0",
     "react": "^18.3.1",

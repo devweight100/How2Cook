@@ -27,16 +27,16 @@ export default function Header() {
   };
   return (
     <div className="container bg-[#c9945b] lg:w-[1536px] w-full lg:h-36 lg:rounded-t-3xl flex justify-center items-center relative lg:flex-row flex-col ">
-      <div className="hidden lg:block text-4xl pl-4 font-patrick cursor-pointer text-[#fcf4d3]">
+      <div className="hidden lg:block text-6xl w-[33%] pl-4 font-patrick cursor-pointer text-[#fcf4d3]">
         <Link to="/">How2Cooking</Link>
       </div>
       <div>
         <Link to="/">
-          <img src={cheflogo} className="w-28 lg:w-72" />
+          <img src={cheflogo} className="w-[30%] lg:w-72" />
         </Link>
       </div>
 
-      <div className="text-sm lg:text-lg pr-4 font-patrick justify-center items-center text-[#fcf4d3] flex">
+      <div className="text-sm lg:text-lg pr-4 w-[30%] font-patrick justify-end items-center text-[#fcf4d3] flex">
         <div className="mx-4 cursor-pointer relative">
           <Link to="/favorite">FAVORITE</Link>
           {likeIds.length > 0 && (
@@ -49,7 +49,7 @@ export default function Header() {
           RANDOM MEAL
         </div>
       </div>
-      <div className="px-2">
+      {/* <div className="px-2">
         <form
           onSubmit={handleSubmitSearch}
           className="flex items-center justify-center"
@@ -68,7 +68,7 @@ export default function Header() {
             </Button>
           </div>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }

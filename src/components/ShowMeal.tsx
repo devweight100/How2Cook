@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMeal } from "@/api/getMeal";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -9,6 +10,15 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 
 interface CATEGORIES {
   idCategory: string;
@@ -96,9 +106,46 @@ function ShowMeal() {
       </Card>
     );
   });
+
+
+
+
   return (
-    <div className="flex flex-wrap items-center justify-center w-full gap-10 mx-auto">
-      {loading ? "Loading..." : mealList}
+    <div className="flex flex-wrap items-center justify-center w-full gap-10 mx-auto ">
+      {loading ? (
+        "Loading..."
+      ) : (
+        <Carousel className="w-[95%]">
+            <CarouselContent>
+              {meal.map((item: CATEGORIES) => {
+                return (
+                  <CarouselItem
+                    key={item.idCategory}
+                    className="md:basis-1/3 lg:basis-1/5 p-2"
+                    onClick={() => handleView(item.strCategory)}
+                  >
+                    <div className="p-2">
+                      <Card className="border-[#bea379] bg-[#e6d8b1] border-4 border-solid p-2 flex flex-col  transition-transform duration-300  hover:scale-105 cursor-pointer hover:shadow-lg min-h-[220px]">
+                        <CardContent className="min-h-[113px]">
+                          <img
+                            className="w-full min-h-[173px] rounded-lg cursor-pointer"
+                            src={`/src/img/${item.strCategory}.png`}
+                            alt={item.strCategory}
+                          />
+                        </CardContent>
+                        <CardTitle className="text-2xl flex justify-center align-middle pb-3 cursor-pointer  font-patrick  text-[#735e3c]">
+                          {item.strCategory}
+                        </CardTitle>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      )}
     </div>
   );
 }

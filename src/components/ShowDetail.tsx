@@ -1,8 +1,8 @@
 import { detailMeal } from "@/api/type/MealType";
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "./ui/table";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, Fragment } from "react";
 import MealContext, { MealContextType } from "./context/Meals";
-import getDb, { deleteData, postData } from "@/api/getDb";
+
 
 interface ShowDetailProps {
   props: detailMeal;
@@ -66,25 +66,40 @@ export default function ShowDetail({ props }: ShowDetailProps) {
 
   const handleLike =async () => {
    setIsLiked(!isLiked);
-       if (!isLiked) {
-         await postData(props)
-         setLikeIds(await getDb());
-       } else {
-         const id = likeIds.filter((ele) => ele.idMeal === props.idMeal)
+    if (!isLiked) {
+      const list = window.localStorage.getItem("favList");
+      const preFav = list ? JSON.parse(list) : [];
+      const { idMeal, strMeal, strMealThumb } = props;
+      const favId = { idMeal, strMeal, strMealThumb };
       
-         id[0].id&&await deleteData(id[0].id)
-         setLikeIds(await getDb());
-       }
+      const favList = [...preFav,favId]
+      window.localStorage.setItem("favList",JSON.stringify(favList))
+      const showFav = window.localStorage.getItem("favList")
+      setLikeIds(showFav?JSON.parse(showFav):[])
+    } else {
+          const list = window.localStorage.getItem("favList");
+          const favorite: detailMeal[] = list ? JSON.parse(list) : [];
+          const newFavorite = favorite.filter((ele) => ele.idMeal !== props.idMeal)
+          window.localStorage.setItem("favList", JSON.stringify(newFavorite));
+   
+         setLikeIds(newFavorite);
+        }
   };
   useEffect(() => {
- 
+    // setLikeIds([])
+    // console.log(likeIds)
     window.scrollTo(0, 0);
     if (likeIds.some((like) => like.idMeal === props.idMeal)) {
       setIsLiked(true);
     } else {
       setIsLiked(false)
     }
-  }, [likeIds.length,props]);
+  }, [likeIds.length, props]);
+  
+  useEffect(() => {
+    setLikeIds([])
+    console.log(likeIds)
+  },[])
   return (
     <div className="flex flex-col justify-center lg:flex-row px-4">
       <div className="lg:w-[70%] mx-auto lg:pr-16">
@@ -149,7 +164,7 @@ export default function ShowDetail({ props }: ShowDetailProps) {
         )}
       </div>
       <div className="lg:w-[30%]">
-        {ingredients.length > 0 ? (
+        {/* {ingredients.length > 0 && (
           <div className="">
             <Table className="p-5 my-5 border-2 mx-auto w-[100%] border-solid border-amber-700">
               <TableHeader className="text-lg border-2 border-collapse border-solid font-patrick text-bold text-amber-700 border-amber-700">
@@ -184,7 +199,51 @@ export default function ShowDetail({ props }: ShowDetailProps) {
             </Table>
            
           </div>
-        ) : null}
+        ) */}
+        {ingredients.length > 0 && (
+          <div className="">
+            <div className="p-5 my-5 border-2 mx-auto w-[100%] grid grid-cols-2 border-solid border-amber-700">
+              <div>Ingredients</div>
+              <div>Measure</div>
+              {ingredients.map((ingre, i) => {
+                return (
+                  <Fragment key={i}>
+                    <div>
+                      <img
+                        className="object-cover w-12"
+                        src={`https://www.themealdb.com/images/ingredients/${ingre?.ingredient}-Small.png`}
+                      />
+                    </div>
+                    <div>{ingre?.ingredient}</div>
+                  </Fragment>
+                );
+              })}
+              {/* <TableBody className="text-lg font-patrick text-[#493f18] ">
+                {ingredients.map((ingre, i) => (
+                  <TableRow
+                    key={ingre?.ingredient?.concat(`${i}`)}
+                    className="h-0 border-b-0"
+                  >
+                    <TableCell className="flex p-2 justify-center ">
+                      <div className="lg:flex justify-center mx-6 hidden">
+                        <img
+                          className="object-cover w-12"
+                          src={`https://www.themealdb.com/images/ingredients/${ingre?.ingredient}-Small.png`}
+                        />
+                      </div>
+                      <div className="flex items-center justify-center lg:justify-start text-sm">
+                        {ingre?.ingredient}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-sm text-center">
+                      {ingre?.measure}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody> */}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
