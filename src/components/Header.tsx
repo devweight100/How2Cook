@@ -1,6 +1,6 @@
 import { Link,  useNavigate } from "react-router-dom";
 
-import cheflogo from "../img/cheflogo.png";
+
 import { useContext } from "react";
 import { getRandom } from "../api/getRandom";
 import MealContext, { MealContextType } from "./context/Meals";
@@ -25,7 +25,7 @@ export default function Header() {
       </div>
       <div>
         <Link to="/">
-          <img src={cheflogo} className="w-[30%] lg:w-72" />
+          <img src="/img/cheflogo.png" className="w-[30%] lg:w-72" />
         </Link>
       </div>
 
@@ -33,7 +33,7 @@ export default function Header() {
         <div className="mx-4 cursor-pointer relative">
           <Link to="/favorite">FAVORITE</Link>
           {likeIds.length > 0 && (
-            <div className="absolute left-[65px] top-[10px] lg:top-[24px] lg:left-[92px] lg:bg-[#78350f] p-1 w-6 h-6 rounded-full text-center text-xs font-bold text-white" >
+            <div className="absolute left-[65px] top-[10px] lg:top-[24px] lg:left-[92px] lg:bg-[#78350f] p-1 w-6 h-6 rounded-full text-center text-xs font-bold text-white">
               {likeIds.length}
             </div>
           )}
