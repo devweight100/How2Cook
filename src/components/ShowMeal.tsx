@@ -118,7 +118,7 @@ function ShowMeal() {
                       <CardContent className="min-h-[113px]">
                         <img
                           className="w-full min-h-[173px] rounded-lg cursor-pointer"
-                          src={`/src/img/${item.strCategory}.png`}
+                          src={`/img/${item.strCategory}.png`}
                           alt={item.strCategory}
                         />
                       </CardContent>
