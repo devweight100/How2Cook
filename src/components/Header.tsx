@@ -1,7 +1,7 @@
 import { Link,  useNavigate } from "react-router-dom";
-import { Button } from "../components/ui/button";
+
 import cheflogo from "../img/cheflogo.png";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { getRandom } from "../api/getRandom";
 import MealContext, { MealContextType } from "./context/Meals";
 
@@ -10,15 +10,8 @@ export default function Header() {
   const navigate = useNavigate();
   const { likeIds } = useContext<MealContextType>(MealContext)
   
-  const [term, setTerm] = useState<string>("");
-  const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    navigate(`/search/${term}`);
-    setTerm("");
-  };
-  useEffect(() => {
-    setTerm(""); 
-  },[navigate])
+
+
 
   const handleRandom = async () => {
     const { idMeal } = await getRandom();

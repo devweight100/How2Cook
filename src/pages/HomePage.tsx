@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import ShowMeal from "../components/ShowMeal";
 
 import { useNavigate } from "react-router-dom";
-import MealContext, { MealContextType } from "@/components/context/Meals";
+
 import { Button } from "@/components/ui/button";
 
 const HomePage = () => {
    const navigate = useNavigate();
-   const { likeIds } = useContext<MealContextType>(MealContext);
+  //  const { likeIds } = useContext<MealContextType>(MealContext);
 
    const [term, setTerm] = useState<string>("");
    const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +21,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <div className="bg-[#f6e5bf] p-12 mx-auto flex flex-col justify-center container w-full rounded-b-3xl">
+      <div className="bg-[#f6e5bf] p-12 mx-auto flex flex-col justify-center container w-full rounded-b-3xl ">
         <ShowMeal />
         <div className="mt-10 bg-[#c9945b] p-5 rounded-xl">
           <form
